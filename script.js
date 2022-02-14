@@ -1,45 +1,108 @@
-var map = L.map('mapid').setView([40,-75], 13);
- L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 10,
-	ext: 'png'
-}).addTo(map);
+require([
+      "esri/WebScene",
+      "esri/views/SceneView",
+      "esri/Camera",
+      "esri/widgets/Home",
+      "dojo/domReady!"
+    ], function(WebScene, SceneView, Camera, Home) {
 
-var marker1 = L.marker([40, -75]).addTo(map)
-var marker2 = L.marker([40, -75.5]).addTo(map)
-var marker3 = L.marker([40, -75.3]).addTo(map)
+    
+      /*var map = new Map({
+        basemap: "streets",
+        ground: "world-elevation"
+      });*/
+      var scene = new WebScene({
+        portalItem:{
+         id:"8046207c1c214b5587230f5e5f8efc77" 
+        }
+      });
+      
+      var camera = new Camera({
+        position: [
+          -71.0597, // lon
+          42.3767, // lat
+          5000// elevation in meters
+        ],
+        tilt:0,
+        heading: 0
+      })
+      
+      var camera2 = new Camera({
+        position: {
+          x: -71.1193,
+          y: 42.3735,
+          z: 5000
+        },
+        tilt: 0,
+        heading: 0
+      })
+      
+      var camera3 = new Camera({
+        position: {
+          x: -71.0096,
+          y: 42.3675,
+          z: 5000
+        },
+        tilt: 0,
+        heading: 0
+      });
 
-var circle = L.circle([40, -75.2], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.9,
-    radius: 5000
-}).addTo(map);
+      var view = new SceneView({
+        container: "viewDiv",
+        map: scene,
+        viewingMode:"global",
+        camera: camera,
+        environment: {
+            lighting: {
+              date: new Date(),
+              directShadowsEnabled: true,
+              // don't update the view time when user pans.
+              // The clock widget drives the time
+              cameraTrackingEnabled: false
+            }
+        },
+    });
+    
+    var homeBtn = new Home({
+        view: view
+      });
 
-var polygon = L.polygon([
-    [40, -75],
-    [40.2, -75.1],
-    [40.2, -75.2]
-],{color:'blue',
-   fillColor:'red'}).addTo(map);
+      // Add the home button to the top left corner of the view
+    view.ui.add(homeBtn, "top-left");
+    
+    [v1,v2,v3].forEach(function(button) {
+      button.style.display = 'flex';
+      view.ui.add(button, 'top-right');
+    });
+      
+      
+   
+    v1.addEventListener('click', function() {
+      // reuse the default camera position already established in the homeBtn
+      view.goTo({
+        target:camera2
+      });
+    });
+    
+    v2.addEventListener('click', function() {
+      // reuse the default camera position already established in the homeBtn
+      view.goTo({
+        target:camera
+      });
+    });
+      
+      v3.addEventListener('click', function() {
+      // reuse the default camera position already established in the homeBtn
+      view.goTo({
+       position: {
+          x: -71.0096,
+          y: 42.3675,
+          z: 5000
+        },
+        tilt: 10,
+        heading: 100
+      });
+    });
 
-marker1.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-marker2.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-marker3.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-circle.bindPopup("I am a circle.");
-polygon.bindPopup("I am a polygon.");
 
-/* this is comment 
-var popup = L.popup()
-    .setLatLng([40, -75])
-    .setContent("I am a standalone popup.")
-    .openOn(map);
-*/
-
-function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
-}
-
-map.on('click', onMapClick);
+    });
