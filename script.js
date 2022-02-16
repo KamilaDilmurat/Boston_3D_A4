@@ -33,8 +33,8 @@ require([
           y: 42.3735,
           z: 5000
         },
-        tilt: 0,
-        heading: 0
+        tilt: 80,
+        heading: 270
       })
       
       var camera3 = new Camera({
@@ -43,8 +43,8 @@ require([
           y: 42.3675,
           z: 5000
         },
-        tilt: 0,
-        heading: 0
+        tilt: 80,
+        heading:270
       });
 
       var view = new SceneView({
