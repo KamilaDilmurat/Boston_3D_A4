@@ -99,8 +99,8 @@ require([
           y: 42.3675,
           z: 5000
         },
-        tilt: 10,
-        heading: 100
+        tilt: 80,
+        heading:270
       });
     });
 
