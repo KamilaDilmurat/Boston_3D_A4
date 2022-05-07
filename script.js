@@ -39,7 +39,7 @@ require([
       
       var camera3 = new Camera({
         position: {
-          x: -90.1905,
+          x: 87.5668,
           y: 38.6302,
           z: 5000
         },
@@ -96,7 +96,7 @@ require([
       view.goTo({
        position: {
           x: -71.0096,
-          y: 42.3675,
+          y: 43.8429,
           z: 5000
         },
         tilt: 80,
