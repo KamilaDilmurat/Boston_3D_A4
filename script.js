@@ -8,19 +8,19 @@ require([
 
     
       /*var map = new Map({
-        basemap: "streets",
+        basemap: "dark-gray",
         ground: "world-elevation"
       });*/
       var scene = new WebScene({
         portalItem:{
-         id:"8046207c1c214b5587230f5e5f8efc77" 
+         id:"001215337f694fb4a44264582520d507" 
         }
       });
       
       var camera = new Camera({
         position: [
-          -71.0096, // lon
-          42.3675, // lat
+          87.5668, // lon
+          43.8429, // lat
           5000// elevation in meters
         ],
         tilt:0,
@@ -29,8 +29,8 @@ require([
       
       var camera2 = new Camera({
         position: {
-          x: -71.1193,
-          y: 42.3735,
+          x: 116.4125,
+          y: 39.8953,
           z: 5000
         },
         tilt: 80,
@@ -39,8 +39,8 @@ require([
       
       var camera3 = new Camera({
         position: {
-          x: -71.0096,
-          y: 42.3675,
+          x: -90.1905,
+          y: 38.6302,
           z: 5000
         },
         tilt: 80,
